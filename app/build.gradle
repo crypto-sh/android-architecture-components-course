@@ -1,0 +1,144 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+
+android {
+    signingConfigs {
+        googlePlay {
+            storeFile file('/Users/alishatergholi/Downloads/MyApplication/laitec.jks')
+            storePassword '123456'
+            keyAlias = 'laitec'
+            keyPassword '123456'
+        }
+    }
+    compileSdkVersion 28
+    buildToolsVersion "29.0.0"
+    defaultConfig {
+        applicationId "com.laitec"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            resValue "string", "app_name", "laitec debug"
+            buildConfigField("String", "baseUrl", "\"https://api.github.com/\"")
+        }
+        release {
+            minifyEnabled false
+            applicationIdSuffix ".release"
+            resValue "string", "app_name", "laitec release"
+            buildConfigField("String", "baseUrl", "\"https://api.github.com/\"")
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.googlePlay
+        }
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+    dataBinding {
+        enabled = true
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    flavorDimensions 'default'
+    productFlavors {
+        cafeBazar {
+            manifestPlaceholders = [name: "cafeBazar App"]
+        }
+        playStore {
+            manifestPlaceholders = [name: "playStore App"]
+        }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    /**
+     * retrofit call service
+     */
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.0'
+
+    /**
+     * lifeCycle dependency
+     */
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+
+    /**
+     * navigation dependency
+     */
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
+
+    /**
+     * kotlin coroutines dependency
+     */
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.2'
+
+    /**
+     * Room dependency
+     */
+    implementation 'androidx.room:room-runtime:2.2.0-alpha01'
+    kapt 'androidx.room:room-compiler:2.2.0-alpha01'
+
+    /**
+     * work Manger dependency
+     */
+    implementation "androidx.work:work-runtime-ktx:2.1.0"
+
+    /**
+     * dagger dependency
+     */
+    implementation 'com.google.dagger:dagger-android:2.20'
+    kapt 'com.google.dagger:dagger-compiler:2.20'
+
+
+    /**
+     * RX  Programming
+     */
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+
+    /**
+     * test dependency
+     */
+    testImplementation 'androidx.test:core:1.2.0'
+    testImplementation 'org.robolectric:robolectric:4.2'
+
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation project(path: ':mycustomlibrary')
+
+}
+

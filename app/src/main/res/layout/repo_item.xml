@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="repo" type="com.laitec.mvvm.model.RepoSearch"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+        <com.laitec.mvvm.widget.TextViewCustom
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_text"
+                android:text="@{repo.name}"
+                tools:text="@tools:sample/first_names"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.laitec.mvvm.widget.TextViewCustom
+                android:id="@+id/tvFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_text"
+                android:text="@{repo.full_name}"
+                tools:text="@tools:sample/full_names"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvName"/>
+
+        <com.laitec.mvvm.widget.TextViewCustom
+                android:id="@+id/tvFork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_text"
+                android:text="@{String.valueOf(repo.forks_count)}"
+                tools:text="123123"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvName"
+        />
+
+        <com.laitec.mvvm.widget.TextViewCustom
+                android:id="@+id/tvstar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_text"
+                android:text="@{String.valueOf(repo.forks_count)}"
+                tools:text="123213"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvFullName"
+        />
+
+
+        <com.laitec.mvvm.widget.TextViewCustom
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_text"
+                android:text="@{repo.description}"
+                tools:text="@tools:sample/full_names"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvFullName"
+        />
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
